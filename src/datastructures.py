@@ -74,15 +74,20 @@ class FamilyStructure:
 
     def add_member(self, member):
         # fill this method and update the return
-        pass
+        if member['id'] is None: member["id"]=self._generateId() 
+        member["last_name"] = self.last_name
+        self._members.append(member)
+        return member
 
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        for position in range(len(self._members)):
+            if self._members[position]["id"] == id:
+                self._members.pop(position)
+                return self._members
 
-    # def get_member(self, id=None):
-        # fill this method and update the return
-        # return self._members[idMember(id)]
+    def get_member(self, id):
+        filtered_member = list(filter(lambda member: member["id"] == id, self._members))
+        return filtered_member[0]
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):
